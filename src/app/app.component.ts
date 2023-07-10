@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { MenuItem } from 'primeng/api';
+import { ConfigService } from './core/config/service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +10,16 @@ import { MenuItem } from 'primeng/api';
 })
 export class AppComponent implements OnInit {
 
-  title = 'gyakszi';
+  // title = 'gyakszi';
 
   public items!: MenuItem[];
+
+  constructor(
+    private _title: Title,
+    private config: ConfigService
+  ) {
+    this._title.setTitle(this.config.get('appTitle') as string);
+  }
 
   ngOnInit(): void {
     this.createItems();
